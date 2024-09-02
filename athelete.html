@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness and Sport Coach Assignment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #D1E9F6; /* Adding lavender background color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            background-color: #D1E9F6; /* Adding a white background to the form container */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn {
+            width: 100%;
+            margin-top: 15px;
+        }
+        .hidden {
+            display: none;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #D1E9F6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logout Button -->
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
+    <div class="container">
+        <h1>Fitness and Sport Coach Assignment</h1>
+        <form id="fitness-form">
+            <div class="form-group mb-3">
+                <label for="gender" class="form-label">Gender:</label>
+                <select id="gender" name="gender" class="form-select" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="weight" class="form-label">Weight (in kg):</label>
+                <input type="number" id="weight" name="weight" class="form-control" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="height" class="form-label">Height (in cm):</label>
+                <input type="number" id="height" name="height" class="form-control" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="Type" class="form-label">Type:</label>
+                <select id="Type" name="Type" class="form-select" required>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                </select>
+            </div>
+
+            
+            <div>
+                <button type="submit" class="btn btn-primary">Check Fitness</button>
+            </div>
+        </form>
+
+        <div id="result-section" class="hidden mt-4">
+            <p id="fitness-result" class="text-center"></p>
+<form>
+<div>
+                <a href="calorie.html" class="btn btn-warning">Calorie Intake</a> <!-- Calorie Intake Button -->
+            </div>
+<div>
+                <a href="exercise.html" class="btn btn-warning">Excercise</a> <!-- Calorie Intake Button -->
+            </div>
+   </form>         
+
+            <div id="sport-section" class="hidden mt-4">
+                <div class="form-group mb-3">
+                    <label for="sports" class="form-label">Select a sport:</label>
+                    <select id="sports" name="sports" class="form-select" required>
+                        <option value="Cricket">Cricket</option>
+                        <option value="Football">Football</option>
+                        <option value="Basketball">Basketball</option>
+                        <option value="Tennis">Tennis</option>
+                        <option value="Badminton">Badminton</option>
+                        <option value="Cycling">Cycling</option>
+                        <option value="Chess">Chess</option>
+                        <option value="Hockey">Hockey</option>
+                        <option value="Diving">Diving</option>
+                        <option value="Shooting">Shooting</option>
+                    </select>
+                </div>
+
+                <button type="button" id="sport-button" class="btn btn-secondary">Continue</button>
+            
+                <div id="coach-choice-section" class="hidden mt-4">
+                    <p class="text-center">Do you require a coach or will you self-learn in an academy?</p>
+                    <div class="form-group mb-3">
+                        <div class="form-check">
+                            <input type="radio" id="coach-yes" name="coach-required" value="yes" class="form-check-input">
+                            <label for="coach-yes" class="form-check-label">Require a Training In Academy</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="coach-no" name="coach-required" value="no" class="form-check-input">
+                            <label for="coach-no" class="form-check-label">Self-learn</label>
+                        </div>
+                    </div>
+
+                    <button type="button" id="coach-choice-button" class="btn btn-success">Submit</button>
+                </div>
+
+                <p id="coach-assignment" class="hidden text-center mt-4"></p>
+
+                <div id="diet-plan-section" class="hidden mt-4">
+                    <p id="diet-plan" class="text-center"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function logout() {
+            // Assuming you're using localStorage for session management
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

@@ -189,6 +189,9 @@
             document.querySelector('.container').style.display = 'none';
             document.getElementById('thanksMessage').style.display = 'block';
         }
+           localStorage.setItem('academyData', JSON.stringify(academyData));
+
+    window.location.href = 'submit.html';
     </script>
 </body>
 </html>

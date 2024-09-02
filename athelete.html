@@ -31,6 +31,10 @@
             text-align: center;
             margin-bottom: 30px;
         }
+h3 {
+            text-align: center;
+            margin-top: 30px;
+        }
         .btn {
             width: 100%;
             margin-top: 15px;
@@ -84,7 +88,6 @@
                 </select>
             </div>
 
-            
             <div>
                 <button type="submit" class="btn btn-primary">Check Fitness</button>
             </div>
@@ -92,56 +95,16 @@
 
         <div id="result-section" class="hidden mt-4">
             <p id="fitness-result" class="text-center"></p>
-<form>
-<div>
+            <div>
                 <a href="calorie.html" class="btn btn-warning">Calorie Intake</a> <!-- Calorie Intake Button -->
             </div>
-<div>
-                <a href="exercise.html" class="btn btn-warning">Excercise</a> <!-- Calorie Intake Button -->
+            <div>
+                <a href="exercise.html" class="btn btn-warning">Exercise</a> <!-- Exercise Button -->
             </div>
-   </form>         
-
-            <div id="sport-section" class="hidden mt-4">
-                <div class="form-group mb-3">
-                    <label for="sports" class="form-label">Select a sport:</label>
-                    <select id="sports" name="sports" class="form-select" required>
-                        <option value="Cricket">Cricket</option>
-                        <option value="Football">Football</option>
-                        <option value="Basketball">Basketball</option>
-                        <option value="Tennis">Tennis</option>
-                        <option value="Badminton">Badminton</option>
-                        <option value="Cycling">Cycling</option>
-                        <option value="Chess">Chess</option>
-                        <option value="Hockey">Hockey</option>
-                        <option value="Diving">Diving</option>
-                        <option value="Shooting">Shooting</option>
-                    </select>
-                </div>
-
-                <button type="button" id="sport-button" class="btn btn-secondary">Continue</button>
-            
-                <div id="coach-choice-section" class="hidden mt-4">
-                    <p class="text-center">Do you require a coach or will you self-learn in an academy?</p>
-                    <div class="form-group mb-3">
-                        <div class="form-check">
-                            <input type="radio" id="coach-yes" name="coach-required" value="yes" class="form-check-input">
-                            <label for="coach-yes" class="form-check-label">Require a Training In Academy</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" id="coach-no" name="coach-required" value="no" class="form-check-input">
-                            <label for="coach-no" class="form-check-label">Self-learn</label>
-                        </div>
-                    </div>
-
-                    <button type="button" id="coach-choice-button" class="btn btn-success">Submit</button>
-                </div>
-
-                <p id="coach-assignment" class="hidden text-center mt-4"></p>
-
-                <div id="diet-plan-section" class="hidden mt-4">
-                    <p id="diet-plan" class="text-center"></p>
-                </div>
+            <div>
+                <a href="sports.html" class="btn btn-warning">Sport Selection</a> <!-- Sport Selection Button -->
             </div>
+<h3>Thanks For Visiting</h3>
         </div>
     </div>
 
@@ -149,6 +112,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
     <script>
+        document.getElementById('fitness-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100; // Convert cm to meters
+            const type = document.getElementById('Type').value;
+
+            // Calculate BMI
+            const bmi = weight / (height * height);
+
+            // Determine BMI category
+            let bmiCategory = '';
+            if (bmi < 18.5) {
+                bmiCategory = 'Underweight';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                bmiCategory = 'Normal weight';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                bmiCategory = 'Overweight';
+            } else {
+                bmiCategory = 'Obese';
+            }
+
+           const fitnessMessage = `BMI is ${bmi.toFixed(2)} (${bmiCategory}).`;
+
+            document.getElementById('fitness-result').textContent = fitnessMessage;
+            document.getElementById('result-section').classList.remove('hidden');
+        });
+
         function logout() {
             // Assuming you're using localStorage for session management
             localStorage.removeItem('currentUser');

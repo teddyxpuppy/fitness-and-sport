@@ -20,7 +20,7 @@
             max-width: 800px;
             margin-top: 100px;
             margin-bottom: 100px;
-            background-color: #D1E9F6; /* Adding a white background to the form container */
+            background-color: #fff; /* Change to white background for form container */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
@@ -64,10 +64,6 @@
         .coach-form input {
             margin-bottom: 5px;
         }
-        
-        #thanksMessage {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -92,7 +88,7 @@
         <div class="form-group">
             <button onclick="registerAcademy()">Register Academy</button>
         </div>
-        <div id="thanksMessage">
+        <div id="thanksMessage" style="display: none;">
             <h2>Thank you for registering!</h2>
             <p>Your academy has been registered successfully.</p>
             <p>Academy ID: <span id="academyId"></span></p>
@@ -186,8 +182,10 @@
 
             document.getElementById('academyId').textContent = academyId;
             document.querySelector('.container').style.display = 'none';
-
-            // Redirect after a slight delay to ensure the thank you message is visible
+            document.getElementById('thanksMessage').style.display = 'block';
+            
+            // Optionally, redirect or handle further logic here
+            // window.location.href = 'submit.html';
             setTimeout(() => {
                 window.location.href = 'submit.html';
             }, 1);

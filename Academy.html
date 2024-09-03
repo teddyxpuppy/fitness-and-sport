@@ -143,50 +143,53 @@
             }
         });
 
-        function registerAcademy() {
-    const academyName = document.getElementById('academyName').value;
-    const academyAddress = document.getElementById('academyAddress').value;
-    const academyPhone = document.getElementById('academyPhone').value;
-    const academyEmail = document.getElementById('academyEmail').value;
-    const numCoaches = parseInt(document.getElementById('numCoaches').value);
+         function registerAcademy() {
+            const academyName = document.getElementById('academyName').value;
+            const academyAddress = document.getElementById('academyAddress').value;
+            const academyPhone = document.getElementById('academyPhone').value;
+            const academyEmail = document.getElementById('academyEmail').value;
+            const numCoaches = parseInt(document.getElementById('numCoaches').value);
 
-    if (!academyName || !academyAddress || !academyPhone || !academyEmail || isNaN(numCoaches)) {
-        alert('Please fill in all academy details.');
-        return;
-    }
+            if (!academyName || !academyAddress || !academyPhone || !academyEmail || isNaN(numCoaches)) {
+                alert('Please fill in all academy details.');
+                return;
+            }
 
-    const academyData = {
-        name: academyName,
-        address: academyAddress,
-        phone: academyPhone,
-        email: academyEmail,
-        coaches: []
-    };
+            const academyData = {
+                name: academyName,
+                address: academyAddress,
+                phone: academyPhone,
+                email: academyEmail,
+                coaches: []
+            };
 
-    for (let i = 1; i <= numCoaches; i++) {
-        const coach = {
-            name: document.getElementById(coachName${i}).value,
-            specialization: document.getElementById(coachSpecialization${i}).value,
-            achievements: document.getElementById(coachAchievements${i}).value,
-            phone: document.getElementById(coachPhone${i}).value,
-            email: document.getElementById(coachEmail${i}).value,
-            certifications: document.getElementById(coachCertifications${i}).value,
-            gender: document.getElementById(coachGender${i}).value
-        };
+            for (let i = 1; i <= numCoaches; i++) {
+                const coach = {
+                    name: document.getElementById(coachName${i}).value,
+                    specialization: document.getElementById(coachSpecialization${i}).value,
+                    achievements: document.getElementById(coachAchievements${i}).value,
+                    phone: document.getElementById(coachPhone${i}).value,
+                    email: document.getElementById(coachEmail${i}).value,
+                    certifications: document.getElementById(coachCertifications${i}).value,
+                    gender: document.getElementById(coachGender${i}).value
+                };
 
-        if (Object.values(coach).some(field => !field)) {
-            alert(Please fill in all details for Coach ${i}.);
-            return;
+                if (Object.values(coach).some(field => !field)) {
+                    alert(Please fill in all details for Coach ${i}.);
+                    return;
+                }
+
+                academyData.coaches.push(coach);
+            }
+
+            const academyId = 'A' + Math.floor(Math.random() * 10000);
+            localStorage.setItem(academy_${academyId}, JSON.stringify(academyData));
+
+            document.getElementById('academyId').textContent = academyId;
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('thanksMessage').style.display = 'block';
         }
-
-        academyData.coaches.push(coach);
-    }
-
-    const academyId = 'A' + Math.floor(Math.random() * 10000);
-    localStorage.setItem(academy_${academyId}, JSON.stringify(academyData));
-
-    // Redirect to submit.html
-    window.location.href = 'submit.html';
-}
+        
+    </script>
 </body>
 </html>

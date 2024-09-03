@@ -8,13 +8,12 @@
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
-            background-color: #D1E9F6;/* Light blue background */
+            background-color: #D1E9F6; /* Light blue background */
         }
         .container {
             max-width: 700px;
-            margin-top: 100px;
-            margin: 0 auto;
-            background-color: #D1E9F6;
+            margin: 100px auto 0;
+            background-color: #fff; /* White background for the container */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -46,7 +45,6 @@
         }
         .academy-info, .assigned-info {
             margin-top: 20px;
-background-color: #D1E9F6;
         }
         .academy-info div, .assigned-info div {
             margin-bottom: 10px;
@@ -54,9 +52,9 @@ background-color: #D1E9F6;
         .coach-info {
             margin-top: 10px;
             padding: 10px;
-            border: 4px solid #ddd;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            background-color: #D1E9F6;
+            background-color: #f9f9f9;
         }
     </style>
 </head>
@@ -73,6 +71,7 @@ background-color: #D1E9F6;
                 <option value="tennis">Tennis</option>
                 <option value="badminton">Badminton</option>
                 <option value="cycling">Cycling</option>
+                <option value="chess">Chess</option>
                 <option value="hockey">Hockey</option>
                 <option value="diving">Diving</option>
                 <option value="shooting">Shooting</option>
@@ -95,12 +94,10 @@ background-color: #D1E9F6;
         function showAcademyDetails() {
             const sport = document.getElementById('sportSelect').value;
             if (sport) {
-                // Retrieve all academy data from localStorage
                 const academyList = Object.keys(localStorage)
                     .filter(key => key.startsWith('academy_'))
                     .map(key => JSON.parse(localStorage.getItem(key)));
 
-                // Filter academies based on whether any of their coaches specialize in the selected sport
                 const filteredAcademies = academyList.filter(academy =>
                     academy.coaches.some(coach => coach.specialization.toLowerCase() === sport.toLowerCase())
                 );
@@ -108,32 +105,36 @@ background-color: #D1E9F6;
                 const academyListContainer = document.getElementById('academyList');
                 academyListContainer.innerHTML = '';
 
-                // Display the filtered academies
-                filteredAcademies.forEach((academy, index) => {
-                    academyListContainer.innerHTML += `
-                        <div class="academy-info">
-                            <strong>Academy:</strong> ${academy.name}<br>
-                            <strong>Address:</strong> ${academy.address}<br>
-                            <strong>Phone:</strong> ${academy.phone}<br>
-                            <strong>Email:</strong> ${academy.email}<br>
-                            <h3>Coaches:</h3>
-                            ${academy.coaches.map(coach => `
-                                <div class="coach-info">
-                                    <strong>Name:</strong> ${coach.name}<br>
-                                    <strong>Specialization:</strong> ${coach.specialization}<br>
-                                    <strong>Achievements:</strong> ${coach.achievements}<br>
-                                    <strong>Phone:</strong> ${coach.phone}<br>
-                                    <strong>Email:</strong> ${coach.email}<br>
-                                    <strong>Certifications:</strong> ${coach.certifications}<br>
-                                    <strong>Gender:</strong> ${coach.gender}<br>
-                                </div>
-                            `).join('')}
-                            <button onclick="assignAcademy(${index})">Select this Academy</button>
-                        </div>
-                    `;
-                });
+                if (filteredAcademies.length === 0) {
+                    academyListContainer.innerHTML = '<p>No academies found for the selected sport.</p>';
+                } else {
+                    filteredAcademies.forEach((academy, index) => {
+                        academyListContainer.innerHTML += `
+                            <div class="academy-info">
+                                <strong>Academy:</strong> ${academy.name}<br>
+                                <strong>Address:</strong> ${academy.address}<br>
+                                <strong>Phone:</strong> ${academy.phone}<br>
+                                <strong>Email:</strong> ${academy.email}<br>
+                                <h3>Coaches:</h3>
+                                ${academy.coaches.map(coach => `
+                                    <div class="coach-info">
+                                        <strong>Name:</strong> ${coach.name}<br>
+                                        <strong>Specialization:</strong> ${coach.specialization}<br>
+                                        <strong>Achievements:</strong> ${coach.achievements}<br>
+                                        <strong>Phone:</strong> ${coach.phone}<br>
+                                        <strong>Email:</strong> ${coach.email}<br>
+                                        <strong>Certifications:</strong> ${coach.certifications}<br>
+                                        <strong>Gender:</strong> ${coach.gender}<br>
+                                    </div>
+                                `).join('')}
+                                <button onclick="assignAcademy(${index})">Select this Academy</button>
+                            </div>
+                        `;
+                    });
+                }
 
                 document.getElementById('academyDetails').style.display = 'block';
+                document.getElementById('confirmation').style.display = 'none';
             } else {
                 alert('Please select a valid sport.');
             }
@@ -143,6 +144,11 @@ background-color: #D1E9F6;
             const academyList = Object.keys(localStorage)
                 .filter(key => key.startsWith('academy_'))
                 .map(key => JSON.parse(localStorage.getItem(key)));
+
+            if (index < 0 || index >= academyList.length) {
+                alert('Invalid academy selection.');
+                return;
+            }
 
             const selectedAcademy = academyList[index];
 

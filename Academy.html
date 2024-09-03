@@ -1,3 +1,5 @@
+New! Keyboard shortcuts … Drive keyboard shortcuts have been updated to give you first-letters navigation
+Academy.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,7 +145,7 @@
             }
         });
 
-         function registerAcademy() {
+        function registerAcademy() {
             const academyName = document.getElementById('academyName').value;
             const academyAddress = document.getElementById('academyAddress').value;
             const academyPhone = document.getElementById('academyPhone').value;
@@ -165,17 +167,17 @@
 
             for (let i = 1; i <= numCoaches; i++) {
                 const coach = {
-                    name: document.getElementById(coachName${i}).value,
-                    specialization: document.getElementById(coachSpecialization${i}).value,
-                    achievements: document.getElementById(coachAchievements${i}).value,
-                    phone: document.getElementById(coachPhone${i}).value,
-                    email: document.getElementById(coachEmail${i}).value,
-                    certifications: document.getElementById(coachCertifications${i}).value,
-                    gender: document.getElementById(coachGender${i}).value
+                    name: document.getElementById(`coachName${i}`).value,
+                    specialization: document.getElementById(`coachSpecialization${i}`).value,
+                    achievements: document.getElementById(`coachAchievements${i}`).value,
+                    phone: document.getElementById(`coachPhone${i}`).value,
+                    email: document.getElementById(`coachEmail${i}`).value,
+                    certifications: document.getElementById(`coachCertifications${i}`).value,
+                    gender: document.getElementById(`coachGender${i}`).value
                 };
 
                 if (Object.values(coach).some(field => !field)) {
-                    alert(Please fill in all details for Coach ${i}.);
+                    alert(`Please fill in all details for Coach ${i}.`);
                     return;
                 }
 
@@ -183,13 +185,15 @@
             }
 
             const academyId = 'A' + Math.floor(Math.random() * 10000);
-            localStorage.setItem(academy_${academyId}, JSON.stringify(academyData));
+            localStorage.setItem(`academy_${academyId}`, JSON.stringify(academyData));
 
             document.getElementById('academyId').textContent = academyId;
             document.querySelector('.container').style.display = 'none';
             document.getElementById('thanksMessage').style.display = 'block';
         }
-        
+           localStorage.setItem('academyData', JSON.stringify(academyData));
+
+    window.location.href = 'submit.html';
     </script>
 </body>
 </html>

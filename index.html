@@ -11,23 +11,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
-         body {
+        body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #D1E9F6; /* Adding lavender background color */
-
+            background-color: #D1E9F6; /* Lavender background color */
             margin: 0;
             padding: 0;
         }
 
+        /* Splash Screen Styling */
+        .splash-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full screen height */
+            background-color: #D1E9F6;
+            text-align: center;
+            flex-direction: column; /* Align items vertically */
+        }
+
+        .app-logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .app-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Login Form Styling */
         .container {
+            display: none; /* Initially hide the login form */
             max-width: 450px;
             margin-top: 100px;
-margin-bottom: 100px;
-            background-color: #D1E9F6; /* Adding a white background to the form container */
+            margin-bottom: 100px;
+            background-color: #D1E9F6; /* Same background color */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
         }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -40,10 +64,11 @@ margin-bottom: 100px;
         .hidden {
             display: none;
         }
- .btn-primary {
+
+        .btn-primary {
             background-color: white;
-            color: blue;  Changing text color to Bootstrap's primary blue */
-            border: 2px solid lavender; /* Adding a border to maintain the button's appearance */
+            color: blue;
+            border: 2px solid lavender; /* Border appearance */
         }
 
         .btn-primary:hover {
@@ -55,31 +80,43 @@ margin-bottom: 100px;
 </head>
 
 <body>
+    <!-- Splash Screen -->
+    <div class="splash-screen">
+        <img src="kk.png" alt="App Logo" class="app-logo">
+        <div class="app-name"><b>SPORT SEHAT</b></div>
+    </div>
+
+    <!-- Login Form -->
     <div class="container">
-<img src="kk.png" alt="Sign Up Image" class="img-fluid" style="max-width: 150px; margin-top: 25px; margin-bottom: 20px;  margin-left: 125px;" >
-<h4 class="text-center"><b>Login In To Your Account</b></h4>
-        
+        <img src="kk.png" alt="Sign Up Image" class="img-fluid" style="max-width: 150px; margin-top: 25px; margin-bottom: 20px; margin-left: 125px;">
+        <h4 class="text-center"><b>Login In To Your Account</b></h4>
+
         <form id="login-form">
             <div class="form-group">
-                
                 <input type="email" class="form-control" id="username" name="username" required placeholder="Email">
             </div>
 
             <div class="form-group">
-                
                 <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
             </div>
 
             <button type="submit" class="btn btn-primary">Login</button>
             <p id="login-error" class="text-danger hidden mt-2">Invalid username or password</p>
         </form>
-        <p class="text-center mt-3">Don't have an account? <a href="index.html">Sign up here</a>.</p>
+        <p class="text-center mt-3">Don't have an account? <a href="signup.html">Sign up here</a>.</p>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Display splash screen for 2 seconds and then show the login form
+        setTimeout(function() {
+            document.querySelector('.splash-screen').style.display = 'none';
+            document.querySelector('.container').style.display = 'block';
+        }, 2000);
+
+        // Handle login form submission
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
